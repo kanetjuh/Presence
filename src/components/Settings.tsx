@@ -1,7 +1,6 @@
-import { FormInput, FormRow, FormSection, FormSwitch, Image, KeyboardAvoidingView, ScrollView } from 'enmity/components';
-import { SettingsCallback, SettingsStore, subscribe, unsubscribe } from 'enmity/api/settings';
-import { React, StyleSheet } from 'enmity/metro/common';
-import Manifest from '../manifest.json';
+import { FormInput, FormSection, KeyboardAvoidingView, ScrollView } from 'enmity/components';
+import { SettingsStore } from 'enmity/api/settings';
+import { React } from 'enmity/metro/common';
 import { getActivity } from '../activity';
 import { setActivity } from '../rpc';
 
@@ -23,32 +22,29 @@ export default ({ settings }: SettingsProps) => {
 		{ button: 1, placeholder_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', placeholder: 'Watch' },
 		{ button: 2, placeholder_url: 'https://store.steampowered.com/app/620/Portal_2/', placeholder: 'Buy Portal 2' },
 	]
-	/*
-	React.useEffect(() => {
-		const callback: SettingsCallback = ({ setting, value }) => {
-			if (settings.get('applicationId', undefined) && settings.get('name', undefined)) {
+
+	React.useEffect(() =>
+		() => {
+			if (settings.get('applicationId', null) && settings.get('name', null)) {
 				setActivity(getActivity())
+			} else {
+				setActivity(undefined)
 			}
-		}
+		}, [])
 
-		subscribe(Manifest.name, callback)
-
-		return unsubscribe(Manifest.name, callback)
-	})
-	*/
 	return <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
 		<ScrollView>
 			<FormSection title="Basic">
 				<FormInput
 					value={settings.get('applicationId')}
-					onChange={(value) => settings.set('applicationId', value)}
+					onChange={(value) => settings.set('applicationId', value || undefined)}
 					title="Application ID"
 					placeholder="12345678910"
 				/>
 				{basicData.map(({ item, placeholder }) =>
 					<FormInput
 						value={settings.get(item.toLowerCase())}
-						onChange={(value) => settings.set(item.toLowerCase(), value)}
+						onChange={(value) => settings.set(item.toLowerCase(), value || undefined)}
 						title={item}
 						placeholder={placeholder}
 					/>
@@ -59,13 +55,13 @@ export default ({ settings }: SettingsProps) => {
 					<>
 						<FormInput
 							value={settings.get(`${image.toLowerCase()}Image`)}
-							onChange={(value) => settings.set(`${image.toLowerCase()}Image`, value)}
+							onChange={(value) => settings.set(`${image.toLowerCase()}Image`, value || undefined)}
 							title={`${image} image asset or URL`}
 							placeholder={placeholder_url}
 						/>
 						<FormInput
 							value={settings.get(`${image.toLowerCase()}ImageText`)}
-							onChange={(value) => settings.set(`${image.toLowerCase()}ImageText`, value)}
+							onChange={(value) => settings.set(`${image.toLowerCase()}ImageText`, value || undefined)}
 							title={`${image} image text`}
 							placeholder={placeholder}
 						/>
@@ -77,13 +73,13 @@ export default ({ settings }: SettingsProps) => {
 					<>
 						<FormInput
 							value={settings.get(`button${button}Label`)}
-							onChange={(value) => settings.set(`button${button}Label`, value)}
+							onChange={(value) => settings.set(`button${button}Label`, value || undefined)}
 							title={`Button ${button} label`}
 							placeholder={placeholder}
 						/>
 						<FormInput
 							value={settings.get(`button${button}Url`)}
-							onChange={(value) => settings.set(`button${button}Url`, value)}
+							onChange={(value) => settings.set(`button${button}Url`, value || undefined)}
 							title={`Button ${button} URL`}
 							placeholder={placeholder_url}
 						/>

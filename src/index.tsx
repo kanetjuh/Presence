@@ -1,7 +1,6 @@
 import { Plugin, registerPlugin } from 'enmity/managers/plugins';
 import { React } from 'enmity/metro/common';
 import Manifest from './manifest.json';
-
 import Settings from './components/Settings';
 import { setActivity } from './rpc';
 import { getActivity } from './activity';
@@ -11,16 +10,34 @@ const Template: Plugin = {
    ...Manifest,
 
    onStart() {
-      this.timeout = setTimeout(() => {
-         if (get(Manifest.name, 'applicationId', undefined) && get(Manifest.name, 'name', undefined)) {
-            setActivity(getActivity())
+      let attempt = 0;
+      const attempts = 3;
+      const lateStartup = () => {
+         try {
+            attempt++;
+
+            if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+               setActivity(getActivity())
+            }
+
+         } catch (err) {
+            if (attempt < attempts) {
+               setTimeout(lateStartup, attempt * 10000);
+            } else {
+               console.error(
+                  `${Manifest.name} failed to start. Giving up.`
+               );
+            }
          }
-      }, 30 * 1000)
+      };
+
+      setTimeout(() => {
+         lateStartup();
+      }, 300);
    },
 
    onStop() {
       setActivity(undefined)
-      clearTimeout(this.timeout)
    },
 
    getSettingsPanel({ settings }) {
