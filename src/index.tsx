@@ -6,7 +6,7 @@ import { setActivity } from './rpc';
 import { getActivity } from './activity';
 import { get } from 'enmity/api/settings';
 
-const Template: Plugin = {
+const Presence: Plugin = {
    ...Manifest,
 
    onStart() {
@@ -45,4 +45,4 @@ const Template: Plugin = {
    }
 };
 
-registerPlugin(Template);
+registerPlugin(Presence);
