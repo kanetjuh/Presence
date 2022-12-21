@@ -66,8 +66,6 @@ export function getActivity(): Activity | undefined {
 	if (activity.buttons && activity.buttons.length === 0) {
 		activity.buttons = undefined
 	}
-
-	console.log(activity)
-	
+		
 	return activity
 }
