@@ -5,6 +5,9 @@ import Settings from './components/Settings';
 import { setActivity } from './rpc';
 import { getActivity } from './activity';
 import { get } from 'enmity/api/settings';
+import { getByProps } from 'enmity/metro';
+
+const ReactNative = getByProps('AppState')
 
 const Presence: Plugin = {
    ...Manifest,
@@ -19,6 +22,15 @@ const Presence: Plugin = {
             if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
                setActivity(getActivity())
             }
+
+            const { remove } = ReactNative.AppState?.addEventListener('change', (state) => {
+               if (state === 'active') {
+                  if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+                     setActivity(getActivity())
+                  }
+               }
+            })
+            this.removeAppStateLister = remove
 
          } catch (err) {
             if (attempt < attempts) {
@@ -38,6 +50,10 @@ const Presence: Plugin = {
 
    onStop() {
       setActivity(undefined)
+
+      if (this.removeAppStateLister) {
+         this.removeAppStateLister()
+      }
    },
 
    getSettingsPanel({ settings }) {
