@@ -18,6 +18,7 @@ export function getActivity(): Activity | undefined {
 	}
 
 	if (!activity.name) return undefined
+	console.log("Got past activity.name check")
 
 	// Images
 
@@ -25,6 +26,7 @@ export function getActivity(): Activity | undefined {
 	const largeImageText = get(Manifest.name, 'largeImageText', undefined)?.toString()
 
 	if (largeImage && activity.assets) {
+		console.log("Adding large image")
 		activity.assets.large_image = largeImage
 		activity.assets.large_text= largeImageText
 	}
@@ -33,11 +35,13 @@ export function getActivity(): Activity | undefined {
 	const smallImageText = get(Manifest.name, 'smallImageText', undefined)?.toString()
 
 	if (smallImage && activity.assets) {
+		console.log("Adding small image")
 		activity.assets.small_image = smallImage
 		activity.assets.small_text= smallImageText
 	}
 
 	if (activity.assets && !activity.assets.large_image && !activity.assets.small_image) {
+		console.log("No assets")
 		activity.assets = undefined
 	}
 
@@ -47,6 +51,7 @@ export function getActivity(): Activity | undefined {
 	const button1Url = get(Manifest.name, 'button1Url', undefined)?.toString()
 
 	if (button1Label && button1Url && activity.buttons) {
+		console.log("Adding button 1")
 		const button: GatewayActivityButton = { label: button1Label, url: button1Url }
 		activity.buttons.push(
 			button
@@ -57,6 +62,7 @@ export function getActivity(): Activity | undefined {
 	const button2Url = get(Manifest.name, 'button2Url', undefined)?.toString()
 
 	if (button2Label && button2Url && activity.buttons) {
+		console.log("Adding button 2")
 		const button: GatewayActivityButton = { label: button2Label, url: button2Url }
 		activity.buttons.push(
 			button
@@ -64,8 +70,11 @@ export function getActivity(): Activity | undefined {
 	}
 
 	if (activity.buttons && activity.buttons.length === 0) {
+		console.log("No buttons")
 		activity.buttons = undefined
 	}
-		
+	
+	console.log(activity)
+
 	return activity
 }

@@ -20,12 +20,14 @@ const Presence: Plugin = {
             attempt++;
 
             if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+               console.log("Setting activity in delayed start")
                setActivity(getActivity())
             }
 
             const { remove } = ReactNative.AppState?.addEventListener('change', (state) => {
                if (state === 'active') {
                   if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+                     console.log("Setting activity on app focus")
                      setActivity(getActivity())
                   }
                }

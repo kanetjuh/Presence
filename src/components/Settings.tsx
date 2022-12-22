@@ -26,6 +26,7 @@ export default ({ settings }: SettingsProps) => {
 	React.useEffect(() =>
 		() => {
 			if (settings.get('applicationId', null) && settings.get('name', null)) {
+				console.log("Setting activity on settings close")
 				setActivity(getActivity())
 			} else {
 				setActivity(undefined)
