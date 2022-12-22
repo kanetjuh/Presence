@@ -13,6 +13,7 @@ export function getActivity(): Activity | undefined {
 		type: 3,
 		details: get(Manifest.name, 'details', undefined)?.toString(),
 		state: get(Manifest.name, 'state', undefined)?.toString(),
+		application_id: get(Manifest.name, 'applicationId', undefined)?.toString(),
 		assets: {},
 		buttons: []
 	}
