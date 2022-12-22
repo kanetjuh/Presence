@@ -28,7 +28,6 @@ export default ({ settings }: SettingsProps) => {
 			if (settings.get('enabled')) {
 				console.log("Setting activity on settings close")
 				// Set timestamps on start (in ms)
-				if (settings.get('timestamps')) settings.set('startTimestamp', Date.now())
 				setActivity(getActivity())
 			} else {
 				setActivity(undefined)
