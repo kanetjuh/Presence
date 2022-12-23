@@ -9,6 +9,10 @@ import { getByProps } from 'enmity/metro';
 
 const ReactNative = getByProps('AppState')
 
+export function hasAppIdAndName() {
+   return get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)
+}
+
 const Presence: Plugin = {
    ...Manifest,
 
@@ -19,14 +23,14 @@ const Presence: Plugin = {
          try {
             attempt++;
 
-            if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+            if (hasAppIdAndName()) {
                console.log("Setting activity in delayed start")
                setActivity(getActivity())
             }
 
             const { remove } = ReactNative.AppState?.addEventListener('change', (state) => {
                if (state === 'active') {
-                  if (get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)) {
+                  if (hasAppIdAndName()) {
                      console.log("Setting activity on app focus")
                      setActivity(getActivity())
                   }

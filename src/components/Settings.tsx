@@ -3,6 +3,7 @@ import { SettingsStore } from 'enmity/api/settings';
 import { Linking, React } from 'enmity/metro/common';
 import { getActivity } from '../activity';
 import { setActivity } from '../rpc';
+import { hasAppIdAndName } from '..';
 
 interface SettingsProps {
 	settings: SettingsStore;
@@ -29,7 +30,7 @@ export default ({ settings }: SettingsProps) => {
 
 	React.useEffect(() =>
 		() => {
-			if (settings.get('applicationId', null) && settings.get('name', null)) {
+			if (hasAppIdAndName()) {
 				console.log("Setting activity on settings close")
 				setActivity(getActivity())
 			} else {
