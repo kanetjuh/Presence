@@ -15,7 +15,12 @@ export function getActivity(): Activity | undefined {
 		state: get(Manifest.name, 'state', undefined)?.toString(),
 		application_id: get(Manifest.name, 'applicationId', undefined)?.toString(),
 		assets: {},
-		buttons: []
+		buttons: [],
+		timestamps: {
+			// .toInteger() is used to convert the string to a number
+			start: Number(get(Manifest.name, 'startTimestamp', undefined)),
+			end: Number(get(Manifest.name, 'endTimestamp', undefined)),
+		},
 	}
 
 	if (!activity.name) return undefined
