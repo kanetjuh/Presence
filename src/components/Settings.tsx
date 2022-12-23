@@ -3,7 +3,7 @@ import { SettingsStore } from 'enmity/api/settings';
 import { Linking, React } from 'enmity/metro/common';
 import { getActivity } from '../activity';
 import { setActivity } from '../rpc';
-import { hasAppIdAndName } from '..';
+import { hasAppIdAndName } from '../activity';
 
 interface SettingsProps {
 	settings: SettingsStore;

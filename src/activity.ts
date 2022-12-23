@@ -34,7 +34,7 @@ export function getActivity(): Activity | undefined {
 	if (largeImage && activity.assets) {
 		console.log("Adding large image")
 		activity.assets.large_image = largeImage
-		activity.assets.large_text= largeImageText
+		activity.assets.large_text = largeImageText
 	}
 
 	const smallImage = get(Manifest.name, 'smallImage', undefined)?.toString()
@@ -43,7 +43,7 @@ export function getActivity(): Activity | undefined {
 	if (smallImage && activity.assets) {
 		console.log("Adding small image")
 		activity.assets.small_image = smallImage
-		activity.assets.small_text= smallImageText
+		activity.assets.small_text = smallImageText
 	}
 
 	if (activity.assets && !activity.assets.large_image && !activity.assets.small_image) {
@@ -79,8 +79,12 @@ export function getActivity(): Activity | undefined {
 		console.log("No buttons")
 		activity.buttons = undefined
 	}
-	
+
 	console.log(activity)
 
 	return activity
+}
+
+export function hasAppIdAndName() {
+	return get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)
 }

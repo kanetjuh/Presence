@@ -3,15 +3,11 @@ import { React } from 'enmity/metro/common';
 import Manifest from './manifest.json';
 import Settings from './components/Settings';
 import { setActivity } from './rpc';
-import { getActivity } from './activity';
+import { getActivity, hasAppIdAndName } from './activity';
 import { get } from 'enmity/api/settings';
 import { getByProps } from 'enmity/metro';
 
 const ReactNative = getByProps('AppState')
-
-export function hasAppIdAndName() {
-   return get(Manifest.name, 'applicationId', false) && get(Manifest.name, 'name', false)
-}
 
 const Presence: Plugin = {
    ...Manifest,
