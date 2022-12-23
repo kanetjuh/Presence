@@ -25,9 +25,8 @@ export default ({ settings }: SettingsProps) => {
 
 	React.useEffect(() =>
 		() => {
-			if (settings.get('enabled')) {
+			if (settings.get('applicationId', null) && settings.get('name', null)) {
 				console.log("Setting activity on settings close")
-				// Set timestamps on start (in ms)
 				setActivity(getActivity())
 			} else {
 				setActivity(undefined)
@@ -36,18 +35,6 @@ export default ({ settings }: SettingsProps) => {
 
 	return <KeyboardAvoidingView behavior='padding' style={{ flex: 1 }}>
 		<ScrollView>
-		<FormSection title="Enable">
-				<FormRow
-					label="Enable Rich Presence"
-					subLabel="Enable or disable the Rich Presence"
-					trailing={(
-						<FormSwitch
-							value={settings.get('enabled')}
-							onValueChange={(value) => settings.set('enabled', value)}
-						/>
-					)}
-				/>
-                </FormSection>
 			<FormSection title="Basic">
 				<FormInput
 					value={settings.get('applicationId')}
