@@ -14,6 +14,10 @@ export default ({ settings }: SettingsProps) => {
 		{ item: 'Details', placeholder: 'Cooperative Testing Initiative' },
 		{ item: 'State', placeholder: 'Testing²' },
 	]
+	const timestampData = [
+		'Start',
+		'End',
+	]
 	const imageData = [
 		{ image: 'Large', placeholder_url: 'teambuilding_testchamber01', placeholder: 'Team Building Test Chamber 01' },
 		{ image: 'Small', placeholder_url: 'apeture_science', placeholder: 'Apeture Science' },
@@ -52,18 +56,14 @@ export default ({ settings }: SettingsProps) => {
 				)}
 			</FormSection>
 			<FormSection title="Timestamps">
-				<FormInput
-					value={settings.get('startTimestamp')}
-					onChange={(value) => settings.set('startTimestamp', value || undefined)}
-					title="Start timestamp"
-					placeholder="12345678910 (in ms)"
-				/>
-				<FormInput
-					value={settings.get('endTimestamp')}
-					onChange={(value) => settings.set('endTimestamp', value || undefined)}
-					title="End timestamp"
-					placeholder="12345678910 (in ms)"
-				/>
+				{timestampData.map((timestamp) => 
+					<FormInput
+						value={settings.get(`${timestamp.toLowerCase()}Timestamp`)}
+						onChange={(value) => settings.set(`${timestamp.toLowerCase()}Timestamp`, value || undefined)}
+						title={`${timestamp} timestamp`}
+						placeholder="12345678910 (in ms)"
+					/>
+				)}
 			</FormSection>
 			<FormSection title="Images">
 				{imageData.map(({ image, placeholder, placeholder_url }) =>
