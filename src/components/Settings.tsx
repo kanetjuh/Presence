@@ -52,16 +52,6 @@ export default ({ settings }: SettingsProps) => {
 				)}
 			</FormSection>
 			<FormSection title="Timestamps">
-				<FormRow
-					label="Enable timestamps"
-					subLabel="Enable or disable the timestamps"
-					trailing={(
-						<FormSwitch
-							value={settings.get('timestamps')}
-							onValueChange={(value) => settings.set('timestamps', value)}
-						/>
-					)}
-				/>
 				<FormInput
 					value={settings.get('startTimestamp')}
 					onChange={(value) => settings.set('startTimestamp', value || undefined)}
