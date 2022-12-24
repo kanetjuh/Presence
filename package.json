@@ -28,6 +28,7 @@
    },
    "dependencies": {
       "discord-api-types": "^0.37.24",
-      "enmity": "*"
+      "enmity": "*",
+      "rollup-plugin-copy": "^3.4.0"
    }
 }
