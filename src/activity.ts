@@ -79,6 +79,13 @@ export function getActivity(): Activity | undefined {
 		console.log("No buttons")
 		activity.buttons = undefined
 	}
+	
+	// Timestamps
+
+	if (!activity.timestamps.start && !activity.timestamps.end) {
+		console.log("No timestamps")
+		activity.timestamps = undefined
+	}
 
 	console.log(activity)
 
