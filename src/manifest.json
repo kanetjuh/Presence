@@ -1,6 +1,6 @@
 {
    "name": "Presence",
-   "version": "1.1.0",
+   "version": "1.1.1",
    "description": "A custom rich presence",
    "authors": [
       {
@@ -11,7 +11,7 @@
    "updater": {
       "plugin": "https://github.com/FierysDiscordAddons/Presence/releases/latest/download/Presence.js",
       "manifest": "https://github.com/FierysDiscordAddons/Presence/releases/latest/download/manifest.json",
-      "changelog": "Add Updater support",
+      "changelog": "Fix presence not being set when timestamps are not set",
       "source": "https://github.com/FierysDiscordAddons/Presence"
    },
    "color": "#f69220"
