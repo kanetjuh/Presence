@@ -87,7 +87,9 @@ export function getActivity(): Activity | undefined {
 	if (!activity.timestamps.start && !activity.timestamps.end) {
 		console.log("No timestamps")
 		activity.timestamps = undefined
+	} elsse if (activity.timestamps.start && !activity.timestamps.end) {
 		activity.timestamps.end = currentTimestamp
+		return activity
 	}
 
 	console.log(activity)
