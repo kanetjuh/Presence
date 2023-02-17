@@ -21,7 +21,7 @@ export function getActivity(): Activity | undefined {
 		timestamps: {
 			// .toInteger() is used to convert the string to a number
 			start: Number(get(Manifest.name, 'startTimestamp', undefined)),
-			end: Number(get(Manifest.name, 'endTimestamp', undefined)),
+			end: Number(get(Manifest.name, 'endTimestamp', null)),
 		},
 	}
 
