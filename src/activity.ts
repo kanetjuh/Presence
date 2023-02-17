@@ -1,6 +1,8 @@
 import { get } from "enmity/api/settings";
 import { GatewayActivity, GatewayActivityButton } from 'discord-api-types/v10';
 import Manifest from './manifest.json';
+import * as time from 'time';
+const currentTimestamp = Number.parseInt(time.time());
 
 interface Activity extends Partial<GatewayActivity> {
 	buttons: GatewayActivityButton[] | undefined
@@ -85,6 +87,7 @@ export function getActivity(): Activity | undefined {
 	if (!activity.timestamps.start && !activity.timestamps.end) {
 		console.log("No timestamps")
 		activity.timestamps = undefined
+		activity.timestamps.end = currentTimestamp
 	}
 
 	console.log(activity)
